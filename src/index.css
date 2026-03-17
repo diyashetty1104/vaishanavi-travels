@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap');
+
+/* Design System — All colors MUST be HSL */
+
+@layer base {
+  :root {
+    --background: 0 0% 98%;
+    --foreground: 220 25% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 25% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 25% 12%;
+
+    /* Deep navy blue - primary brand */
+    --primary: 218 65% 18%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Warm orange - CTA accent */
+    --accent-orange: 22 95% 52%;
+    --accent-orange-foreground: 0 0% 100%;
+
+    /* Light steel secondary */
+    --secondary: 214 32% 93%;
+    --secondary-foreground: 218 65% 18%;
+
+    --muted: 214 20% 94%;
+    --muted-foreground: 215 15% 52%;
+
+    --accent: 214 32% 93%;
+    --accent-foreground: 218 65% 18%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 20% 88%;
+    --input: 214 20% 88%;
+    --ring: 218 65% 18%;
+
+    --radius: 0.5rem;
+
+    /* Section backgrounds */
+    --surface-dark: 218 65% 18%;
+    --surface-light: 214 32% 97%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(to bottom, hsl(218 65% 12% / 0.75), hsl(218 65% 8% / 0.55));
+    --gradient-cta: linear-gradient(135deg, hsl(22 95% 52%), hsl(30 100% 45%));
+    --gradient-primary: linear-gradient(135deg, hsl(218 65% 18%), hsl(218 65% 28%));
+
+    /* Shadows */
+    --shadow-card: 0 4px 24px -4px hsl(218 65% 18% / 0.12);
+    --shadow-elevated: 0 12px 40px -8px hsl(218 65% 18% / 0.2);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: 'Montserrat', sans-serif;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .gradient-cta {
+    background: var(--gradient-cta);
+  }
+
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+}
