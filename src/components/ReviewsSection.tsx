@@ -7,48 +7,42 @@ const staticReviews = [
     name: "Rajesh Kumar",
     location: "Mangalore",
     rating: 5,
-    review:
-      "Excellent service! Booked a Toyota Innova for our family trip to Coorg. The driver was punctual, courteous and the vehicle was spotless. Highly recommend Vaishnavi Travels!",
+    review: "Excellent service! Booked a Toyota Innova for our family trip to Coorg. The driver was punctual, courteous and the vehicle was spotless. Highly recommend Vaishnavi Travels!",
     trip: "Mangalore → Coorg",
   },
   {
     name: "Priya Shetty",
     location: "Udupi",
     rating: 5,
-    review:
-      "Used their airport transfer service multiple times. Always on time and very professional. The booking process is smooth and the drivers are well-behaved. 5 stars!",
+    review: "Used their airport transfer service multiple times. Always on time and very professional. The booking process is smooth and the drivers are well-behaved. 5 stars!",
     trip: "Airport Transfer",
   },
   {
     name: "Arun Prabhu",
     location: "Bangalore",
     rating: 5,
-    review:
-      "Hired a Tempo Traveller for our corporate team outing. 15 of us travelled comfortably. Great AC, clean interiors and the driver knew all the routes perfectly.",
+    review: "Hired a Tempo Traveller for our corporate team outing. 15 of us travelled comfortably. Great AC, clean interiors and the driver knew all the routes perfectly.",
     trip: "Corporate Outing",
   },
   {
     name: "Deepa Kamath",
     location: "Mangalore",
     rating: 5,
-    review:
-      "We booked a mini bus for a wedding function. Very reasonable price and the service was beyond expectations. The team was very cooperative and accommodating.",
+    review: "We booked a mini bus for a wedding function. Very reasonable price and the service was beyond expectations. The team was very cooperative and accommodating.",
     trip: "Wedding Function",
   },
   {
     name: "Mohammed Farhan",
     location: "Mangalore",
     rating: 4,
-    review:
-      "Good round trip service from Mangalore to Goa. Driver was experienced with mountain roads. Will definitely use Vaishnavi Travels again for future trips.",
+    review: "Good round trip service from Mangalore to Goa. Driver was experienced with mountain roads. Will definitely use Vaishnavi Travels again for future trips.",
     trip: "Mangalore → Goa",
   },
   {
     name: "Sunitha Rao",
     location: "Udupi",
     rating: 5,
-    review:
-      "Perfect experience for our temple tour. Visited Dharmasthala and Kukke Subramanya. Vaishnavi Travels made our pilgrimage comfortable and memorable. Thank you!",
+    review: "Perfect experience for our temple tour. Visited Dharmasthala and Kukke Subramanya. Vaishnavi Travels made our pilgrimage comfortable and memorable. Thank you!",
     trip: "Temple Tour",
   },
 ];
@@ -152,7 +146,6 @@ const ReviewsSection = () => {
     ]);
     setSubmitting(false);
     if (!error) {
-      // Optimistically add to top
       setDynamicReviews((prev) => [
         { ...form, location: form.location || undefined, trip: form.trip || undefined },
         ...prev,
@@ -161,15 +154,8 @@ const ReviewsSection = () => {
     }
   };
 
-  // Overall rating: weighted average of static (4.83) and dynamic reviews
-  const allRatings = [
-    ...staticReviews.map((r) => r.rating),
-    ...dynamicReviews.map((r) => r.rating),
-  ];
-  const overallRating =
-    allRatings.length > 0
-      ? (allRatings.reduce((a, b) => a + b, 0) / allRatings.length).toFixed(1)
-      : "4.7";
+  // Fixed rating as per request
+  const overallRating = "4.6";
 
   return (
     <section id="reviews" className="py-20 bg-card">
@@ -186,7 +172,7 @@ const ReviewsSection = () => {
             Thousands of happy travellers trust Vaishnavi Travels for their journeys across Karnataka and beyond.
           </p>
 
-          {/* Overall Rating Badge */}
+          {/* Overall Rating Badge - Updated to 4.6 and removed review count */}
           <div className="inline-flex items-center gap-3 mt-6 bg-surface-light border border-accent-orange/30 rounded-2xl px-6 py-3 shadow-card">
             <div className="flex gap-0.5">
               {[1, 2, 3, 4, 5].map((s) => (
@@ -194,7 +180,7 @@ const ReviewsSection = () => {
                   key={s}
                   size={18}
                   className={
-                    s <= Math.round(parseFloat(overallRating))
+                    s <= 4 
                       ? "text-accent-orange fill-accent-orange"
                       : "text-border"
                   }
@@ -203,9 +189,6 @@ const ReviewsSection = () => {
             </div>
             <span className="font-display font-black text-primary text-2xl">{overallRating}</span>
             <span className="font-body text-muted-foreground text-sm">/ 5</span>
-            <span className="font-body text-muted-foreground text-sm">
-              · {allRatings.length} reviews
-            </span>
           </div>
         </div>
 
@@ -246,7 +229,7 @@ const ReviewsSection = () => {
                     placeholder="e.g. Rahul Shetty"
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    className="w-full border border-border rounded-lg px-3 py-2.5 bg-card text-sm font-body text-foreground placeholder:text-muted-foreground outline-none focus:border-accent-orange transition-colors"
+                    className="w-full border border-border rounded-lg px-3 py-2.5 bg-card text-sm font-body text-foreground outline-none focus:border-accent-orange transition-colors"
                   />
                 </div>
                 <div>
@@ -259,7 +242,7 @@ const ReviewsSection = () => {
                     placeholder="e.g. Mangalore"
                     value={form.location}
                     onChange={(e) => setForm({ ...form, location: e.target.value })}
-                    className="w-full border border-border rounded-lg px-3 py-2.5 bg-card text-sm font-body text-foreground placeholder:text-muted-foreground outline-none focus:border-accent-orange transition-colors"
+                    className="w-full border border-border rounded-lg px-3 py-2.5 bg-card text-sm font-body text-foreground outline-none focus:border-accent-orange transition-colors"
                   />
                 </div>
               </div>
@@ -269,9 +252,6 @@ const ReviewsSection = () => {
                   Your Rating <span className="text-destructive">*</span>
                 </label>
                 <StarPicker value={form.rating} onChange={(v) => setForm({ ...form, rating: v })} />
-                {form.rating === 0 && (
-                  <p className="text-xs text-muted-foreground mt-1">Please select a star rating</p>
-                )}
               </div>
 
               <div>
@@ -284,7 +264,7 @@ const ReviewsSection = () => {
                   placeholder="e.g. Mangalore → Coorg"
                   value={form.trip}
                   onChange={(e) => setForm({ ...form, trip: e.target.value })}
-                  className="w-full border border-border rounded-lg px-3 py-2.5 bg-card text-sm font-body text-foreground placeholder:text-muted-foreground outline-none focus:border-accent-orange transition-colors"
+                  className="w-full border border-border rounded-lg px-3 py-2.5 bg-card text-sm font-body text-foreground outline-none focus:border-accent-orange transition-colors"
                 />
               </div>
 
@@ -299,9 +279,8 @@ const ReviewsSection = () => {
                   placeholder="Tell us about your experience..."
                   value={form.review}
                   onChange={(e) => setForm({ ...form, review: e.target.value })}
-                  className="w-full border border-border rounded-lg px-3 py-2.5 bg-card text-sm font-body text-foreground placeholder:text-muted-foreground outline-none focus:border-accent-orange transition-colors resize-none"
+                  className="w-full border border-border rounded-lg px-3 py-2.5 bg-card text-sm font-body text-foreground outline-none focus:border-accent-orange transition-colors resize-none"
                 />
-                <p className="text-xs text-muted-foreground text-right mt-1">{form.review.length}/600</p>
               </div>
 
               <div className="flex gap-3">
@@ -325,7 +304,6 @@ const ReviewsSection = () => {
           </div>
         )}
 
-        {/* Success State */}
         {submitted && (
           <div className="mt-10 max-w-xl mx-auto bg-surface-light border border-border rounded-2xl p-10 text-center shadow-card">
             <CheckCircle size={48} className="text-accent-orange mx-auto mb-4" />

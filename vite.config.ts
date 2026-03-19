@@ -7,7 +7,7 @@ import { componentTagger } from "lovable-tagger";
 export default defineConfig(({ mode }) => ({
   // Temporarily disabled for local testing. 
   // Enable this by removing the // when you deploy to GitHub Pages
-  base: "/vaishanavi-travels/", 
+  base: "/", 
   
   server: {
     host: "::",
